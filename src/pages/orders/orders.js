@@ -58,8 +58,8 @@ function Orders() {
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'orderStatus',
+      key: 'orderStatus',
       render: status => {
         const color = status === 'pending' ? 'orange' : 'green'
         return <Tag color={color}>

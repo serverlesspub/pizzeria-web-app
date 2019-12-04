@@ -26,6 +26,7 @@ function NewOrder(props) {
       if (!err) {
         console.log('Received values of form: ', values)
         await createOrder(values.pizza, values.address)
+        history.push('/orders')
       }
     })
   }
