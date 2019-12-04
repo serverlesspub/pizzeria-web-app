@@ -1,0 +1,16 @@
+.logo {
+  display: block;
+  float: left;
+  color: white;
+  font-family: cursive;
+  font-size: 24px;
+}
+
+.menu {
+  float: right;
+}
+
+.spinner {
+  display: block;
+  margin: 50px auto;
+}
