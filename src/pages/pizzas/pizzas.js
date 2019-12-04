@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Col, Empty, List, Row, Spin, Typography } from 'antd'
+import { Link } from 'react-router-dom'
 import { getPizzas } from '../../services/api'
 import './pizzas.css'
 
@@ -37,7 +38,7 @@ function Pizzas() {
                     <Card
                       title={pizza.name}
                       extra={
-                        <a href="#">Order</a>
+                        <Link to={`/orders/new/${pizza.id}`}>Order</Link>
                       }
                       bordered={false}
                     >

@@ -10,7 +10,13 @@ async function getOrders() {
   return JSON.parse(response.body);
 }
 
+async function createOrder(pizza, address) {
+  console.log('Pizza:', pizza)
+  console.log('Address:', address)
+}
+
 export {
   getPizzas,
-  getOrders
+  getOrders,
+  createOrder
 }

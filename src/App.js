@@ -10,7 +10,13 @@ import {
 } from 'react-router-dom';
 import Pizzas from './pages/pizzas/pizzas'
 import Orders from './pages/orders/orders'
+import NewOrder from './pages/new-order/new-order'
 import { Layout, Menu } from 'antd';
+import Amplify from 'aws-amplify'
+import awsconfig from './config'
+import { withAuthenticator } from 'aws-amplify-react'
+
+Amplify.configure(awsconfig)
 const { Header, Footer, Content } = Layout;
 
 function MainMenu() {
@@ -49,6 +55,12 @@ function App() {
         <Content>
           <Switch>
             <Route path="/delivery">Delivery</Route>
+            <Route path="/orders/new/:pizzaId">
+              <NewOrder />
+            </Route>
+            <Route path="/orders/new">
+              <NewOrder />
+            </Route>
             <Route path="/orders">
               <Orders />
             </Route>
@@ -63,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App, true)

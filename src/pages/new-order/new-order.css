@@ -1,0 +1,15 @@
+.spinner {
+  display: block;
+  margin: 50px auto;
+}
+
+.pageHeader {
+  background: white;
+  border: 1px solid rgb(235, 237, 240);
+}
+
+.orderForm {
+  background: white;
+  border: 1px solid rgb(235, 237, 240);
+  padding: 20px;
+}
