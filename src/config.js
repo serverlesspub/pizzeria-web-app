@@ -5,7 +5,8 @@ const config = {
   aws_user_pools_id: 'eu-central-1_jkxzTQUv7',
   aws_user_pools_web_client_id: '2d76copbi9t2vu61bbtip6h37l',
   oauth: {},
-  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS'
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
+  apiUrl: 'https://whpcvzntil.execute-api.eu-central-1.amazonaws.com/latest'
 }
 
 export default config

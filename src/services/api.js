@@ -1,19 +1,18 @@
 import rp from 'minimal-request-promise';
-
-const API_URL = 'https://whpcvzntil.execute-api.eu-central-1.amazonaws.com/latest'
+import config from '../config'
 
 async function getPizzas() {
-  const response = await rp.get(`${API_URL}/pizzas`)
+  const response = await rp.get(`${config.apiUrl}/pizzas`)
   return JSON.parse(response.body);
 }
 
 async function getOrders() {
-  const response = await rp.get(`${API_URL}/orders`)
+  const response = await rp.get(`${config.apiUrl}/orders`)
   return JSON.parse(response.body);
 }
 
 async function createOrder(pizza, address) {
-  const response = await rp.post(`${API_URL}/orders`, {
+  const response = await rp.post(`${config.apiUrl}/orders`, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -28,7 +27,7 @@ async function createOrder(pizza, address) {
 }
 
 async function deleteOrder(orderId) {
-  const response = await rp.delete(`${API_URL}/orders/${orderId}`)
+  const response = await rp.delete(`${config.apiUrl}/orders/${orderId}`)
   console.log(response);
   return response;
 }
