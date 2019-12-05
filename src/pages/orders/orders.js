@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Empty, Spin, Table, Tag } from 'antd'
-import { getPizzas, getOrders } from '../../services/api'
+import React, { useEffect, useState, Fragment } from 'react'
+import { Button, Empty, message, PageHeader, Popconfirm, Spin, Table, Tag } from 'antd'
+import { Link } from 'react-router-dom'
+import { getPizzas, getOrders, deleteOrder } from '../../services/api'
 import './orders.css'
 
 function parseOrders(orders, pizzas) {
@@ -13,6 +14,7 @@ function parseOrders(orders, pizzas) {
 function Orders() {
   const [orders, setOrders] = useState([])
   const [pizzas, setPizzas] = useState([])
+  const [counter, setCounter] = useState(0)
   const [loading, setLoading] = useState({
     pizzas: true,
     orders: true
@@ -38,7 +40,7 @@ function Orders() {
     }
     getOrdersFunction()
     getPizzasFunction()
-  }, []);
+  }, [counter]);
 
   const columns = [
     {
@@ -66,6 +68,26 @@ function Orders() {
           { status }
         </Tag>
       }
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'orderId',
+      key: 'actions',
+      render: orderId => (
+        <Popconfirm
+          placement="topRight"
+          title="Are you sure delete this task?"
+          onConfirm={async () => {
+            await deleteOrder(orderId)
+            setCounter(c => c + 1)
+            message.success('Order successfully deleted')
+          }}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button type="danger">Delete</Button>
+        </Popconfirm>
+      )
     }
   ]
 
@@ -78,12 +100,23 @@ function Orders() {
           (orders.length < 1 && pizzas) ? (
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No orders" />
           ) : (
-            <Table
-              rowKey={row => row.orderId}
-              columns={columns}
-              dataSource={parseOrders(orders, pizzas)}
-              pagination={false}
-            />
+            <Fragment>
+              <PageHeader
+                className="pageHeader"
+                title="Orders"
+                extra={[
+                  <Button key="1" type="primary">
+                    <Link to="/orders/new">Create new order</Link>
+                  </Button>,
+                ]}
+              />
+              <Table
+                rowKey={row => row.orderId}
+                columns={columns}
+                dataSource={parseOrders(orders, pizzas)}
+                pagination={false}
+              />
+            </Fragment>
           )
         )
       }

@@ -27,8 +27,15 @@ async function createOrder(pizza, address) {
   return response
 }
 
+async function deleteOrder(orderId) {
+  const response = await rp.delete(`${API_URL}/orders/${orderId}`)
+  console.log(response);
+  return response;
+}
+
 export {
   getPizzas,
   getOrders,
-  createOrder
+  createOrder,
+  deleteOrder
 }
