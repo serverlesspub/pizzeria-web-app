@@ -37,9 +37,6 @@ function MainMenu() {
       <Menu.Item key="orders">
         <Link to="/orders">Orders</Link>
       </Menu.Item>
-      <Menu.Item key="delivery">
-        <Link to="/delivery">Delivery</Link>
-      </Menu.Item>
     </Menu>
   );
 }
@@ -54,7 +51,6 @@ function App() {
         </Header>
         <Content>
           <Switch>
-            <Route path="/delivery">Delivery</Route>
             <Route path="/orders/new/:pizzaId">
               <NewOrder />
             </Route>

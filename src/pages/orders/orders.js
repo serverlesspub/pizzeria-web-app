@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
+import { Auth } from 'aws-amplify'
 import { Button, Empty, message, PageHeader, Popconfirm, Spin, Table, Tag } from 'antd'
 import { Link } from 'react-router-dom'
 import { getPizzas, getOrders, deleteOrder } from '../../services/api'
@@ -29,8 +30,8 @@ function Orders() {
         pizzas: false
       }))
     }
-    const getOrdersFunction = async () => {
-      const ordersList = await getOrders()
+    const getOrdersFunction = async (token) => {
+      const ordersList = await getOrders(token)
       console.log(ordersList)
       setOrders(ordersList)
       setLoading(loading => ({
@@ -38,8 +39,14 @@ function Orders() {
         orders: false
       }))
     }
-    getOrdersFunction()
-    getPizzasFunction()
+    const getUser = async () => {
+      const user = await Auth.currentAuthenticatedUser()
+      const token = user.signInUserSession.idToken.jwtToken
+      console.log('USER', user.signInUserSession)
+      await getPizzasFunction()
+      await getOrdersFunction(token)
+    }
+    getUser()
   }, [counter]);
 
   const columns = [

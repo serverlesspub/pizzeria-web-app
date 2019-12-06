@@ -6,8 +6,13 @@ async function getPizzas() {
   return JSON.parse(response.body);
 }
 
-async function getOrders() {
-  const response = await rp.get(`${config.apiUrl}/orders`)
+async function getOrders(token) {
+  const response = await rp.get(`${config.apiUrl}/orders`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
   return JSON.parse(response.body);
 }
 
